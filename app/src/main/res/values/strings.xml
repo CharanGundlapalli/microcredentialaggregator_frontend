@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MicroCredential</string>
+    <string name="welcome_title">Welcome to Micro-Credential Aggregator</string>
+    <string name="welcome_desc">
+A unified platform that brings together learners, institutions, and employers through verified digital credentials
+    </string>
+    <string name="next">Next</string>
+    <string-array name="certificate_types">
+        <item>Academic</item>
+        <item>Professional</item>
+        <item>Skill</item>
+    </string-array>
+
+
+</resources>
