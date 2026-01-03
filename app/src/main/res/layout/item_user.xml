@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_user_initial"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_user_initial"
+            android:gravity="center"
+            tools:text="A"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+            <!-- using bg_user_initial as placeholder, assuming it exists based on other layout usage -->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_user_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Role: User"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_user_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Active"
+            android:textColor="#4CAF50"
+            android:textStyle="bold"
+            android:background="@drawable/bg_status_active" 
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:textSize="12sp"/>
+            <!-- Assuming simple status indication. If drawable missing, will rely on text color -->
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

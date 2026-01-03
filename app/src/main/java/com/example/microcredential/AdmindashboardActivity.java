@@ -73,8 +73,12 @@ public class AdmindashboardActivity extends AppCompatActivity {
                 // You are already here
                 return true;
             } else if (itemId == R.id.navigation_users) {
-                // TODO: Navigate to Users screen
-                Toast.makeText(this, "Users", Toast.LENGTH_SHORT).show();
+                // Navigate to Users screen
+                Intent intent = new Intent(AdmindashboardActivity.this, AdminUsersActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0); // Smooth transition
+                finish(); // Optional: finish current activity if you want to keep stack clean or manage
+                          // differently
                 return true;
             } else if (itemId == R.id.navigation_requests) {
                 // TODO: Navigate to Requests screen
@@ -122,7 +126,8 @@ public class AdmindashboardActivity extends AppCompatActivity {
                 } else {
                     runOnUiThread(() -> {
                         try {
-                            Toast.makeText(AdmindashboardActivity.this, jsonResponse.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdmindashboardActivity.this, jsonResponse.getString("message"),
+                                    Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -156,13 +161,15 @@ public class AdmindashboardActivity extends AppCompatActivity {
                 if (jsonResponse.getString("status").equals("success")) {
                     runOnUiThread(() -> {
                         sessionManager.logout();
-                        Toast.makeText(AdmindashboardActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdmindashboardActivity.this, "Logged out successfully", Toast.LENGTH_SHORT)
+                                .show();
                         redirectToLogin();
                     });
                 } else {
                     runOnUiThread(() -> {
                         try {
-                            Toast.makeText(AdmindashboardActivity.this, jsonResponse.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdmindashboardActivity.this, jsonResponse.getString("message"),
+                                    Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -16,4 +16,9 @@ public class ApiConfig {
     public static final String VIEW_MY_CERTIFICATES_URL = BASE_URL + "view_my_certificates.php";
     public static final String VIEW_CERTIFICATE_DETAILS_URL = BASE_URL + "view_certificate_details.php";
     public static final String REMOVE_CERTIFICATE_URL = BASE_URL + "remove_certificate.php";
+    public static final String ADMIN_GET_USERS_URL = BASE_URL + "admin_get_users_issuers.php";
+    public static final String ADMIN_VIEW_USER_DETAILS_URL = BASE_URL + "admin_view_user_details.php";
+    public static final String UPDATE_USER_STATUS_URL = BASE_URL + "update_user_status.php";
+    public static final String ADMIN_VIEW_USER_CERTIFICATES_URL = BASE_URL + "admin_view_user_certificates.php";
+    public static final String VERIFY_CERTIFICATE_URL = BASE_URL + "verify_certificate.php";
 }

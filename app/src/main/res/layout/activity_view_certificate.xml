@@ -143,6 +143,44 @@
                 android:padding="12dp"
                 app:cornerRadius="8dp"/>
 
+            <!-- Admin Action Buttons -->
+            <LinearLayout
+                android:id="@+id/layout_admin_actions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="32dp"
+                android:visibility="gone">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_reject"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="12dp"
+                    app:backgroundTint="#F44336"
+                    android:text="Reject"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    app:cornerRadius="8dp"/>
+
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_verify"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="12dp"
+                    app:backgroundTint="#4CAF50"
+                    android:text="Verify"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    app:cornerRadius="8dp"/>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

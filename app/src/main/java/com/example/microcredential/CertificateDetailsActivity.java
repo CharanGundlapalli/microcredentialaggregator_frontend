@@ -76,24 +76,6 @@ public class CertificateDetailsActivity extends AppCompatActivity {
         fetchDetails();
     }
 
-    private void initViews() {
-        progressBar = findViewById(R.id.progressBar);
-        tvTitle = findViewById(R.id.tv_title);
-        tvStatus = findViewById(R.id.tv_status);
-        btnBack = findViewById(R.id.btn_back);
-        btnDownload = findViewById(R.id.btn_download);
-        btnRemove = findViewById(R.id.btn_remove);
-
-        rowOrg = findViewById(R.id.row_organization);
-        rowIssued = findViewById(R.id.row_issued);
-        rowExpiry = findViewById(R.id.row_expiry);
-        rowCredentialId = findViewById(R.id.row_credential_id);
-        rowType = findViewById(R.id.row_type);
-
-        btnBack.setOnClickListener(v -> finish());
-        btnRemove.setOnClickListener(v -> showRemoveConfirmationDialog());
-    }
-
     private void showRemoveConfirmationDialog() {
         new androidx.appcompat.app.AlertDialog.Builder(this)
                 .setTitle("Remove Certificate")
@@ -256,5 +238,100 @@ public class CertificateDetailsActivity extends AppCompatActivity {
                 DrawableCompat.setTint(background, color);
             }
         }
+    }
+
+    private void initViews() {
+        progressBar = findViewById(R.id.progressBar);
+        tvTitle = findViewById(R.id.tv_title);
+        tvStatus = findViewById(R.id.tv_status);
+        btnBack = findViewById(R.id.btn_back);
+        btnDownload = findViewById(R.id.btn_download);
+        btnRemove = findViewById(R.id.btn_remove);
+
+        rowOrg = findViewById(R.id.row_organization);
+        rowIssued = findViewById(R.id.row_issued);
+        rowExpiry = findViewById(R.id.row_expiry);
+        rowCredentialId = findViewById(R.id.row_credential_id);
+        rowType = findViewById(R.id.row_type);
+
+        // Admin buttons
+        LinearLayout layoutAdminActions = findViewById(R.id.layout_admin_actions);
+        android.widget.Button btnVerify = findViewById(R.id.btn_verify);
+        android.widget.Button btnReject = findViewById(R.id.btn_reject);
+
+        boolean isAdmin = getIntent().getBooleanExtra("is_admin", false);
+        String role = sessionManager.getRole();
+
+        if (isAdmin || "admin".equalsIgnoreCase(role)) {
+            layoutAdminActions.setVisibility(View.VISIBLE);
+            btnRemove.setVisibility(View.GONE); // Hide remove for admin, or keep if needed
+
+            btnVerify.setOnClickListener(v -> verifyCertificate("verified"));
+            btnReject.setOnClickListener(v -> verifyCertificate("rejected"));
+        } else {
+            layoutAdminActions.setVisibility(View.GONE);
+            btnRemove.setVisibility(View.VISIBLE);
+        }
+
+        btnBack.setOnClickListener(v -> finish());
+        btnRemove.setOnClickListener(v -> showRemoveConfirmationDialog());
+    }
+
+    private void verifyCertificate(String status) {
+        progressBar.setVisibility(View.VISIBLE);
+        new Thread(() -> {
+            try {
+                URL url = new URL(ApiConfig.VERIFY_CERTIFICATE_URL);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setRequestProperty("Cookie", "PHPSESSID=" + sessionManager.getSessionId());
+                conn.setDoOutput(true);
+
+                JSONObject params = new JSONObject();
+                params.put("certificate_uid", certificateUid);
+                params.put("status", status);
+
+                java.io.OutputStream os = conn.getOutputStream();
+                java.io.BufferedWriter writer = new java.io.BufferedWriter(new java.io.OutputStreamWriter(os, "UTF-8"));
+                writer.write(params.toString());
+                writer.flush();
+                writer.close();
+                os.close();
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    response.append(line);
+                }
+                br.close();
+
+                JSONObject jsonResponse = new JSONObject(response.toString());
+
+                runOnUiThread(() -> {
+                    progressBar.setVisibility(View.GONE);
+                    try {
+                        if (jsonResponse.getString("status").equals("success")) {
+                            Toast.makeText(CertificateDetailsActivity.this, "Certificate " + status, Toast.LENGTH_SHORT)
+                                    .show();
+                            setStatus(status);
+                        } else {
+                            Toast.makeText(CertificateDetailsActivity.this, jsonResponse.getString("message"),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                runOnUiThread(() -> {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(CertificateDetailsActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
+                });
+            }
+        }).start();
     }
 }
