@@ -260,15 +260,21 @@ public class CertificateDetailsActivity extends AppCompatActivity {
         android.widget.Button btnReject = findViewById(R.id.btn_reject);
 
         boolean isAdmin = getIntent().getBooleanExtra("is_admin", false);
+        boolean isEmployerView = getIntent().getBooleanExtra("is_employer_view", false);
         String role = sessionManager.getRole();
 
         if (isAdmin || "admin".equalsIgnoreCase(role)) {
             layoutAdminActions.setVisibility(View.VISIBLE);
-            btnRemove.setVisibility(View.GONE); // Hide remove for admin, or keep if needed
+            btnRemove.setVisibility(View.GONE); // Hide remove for admin
 
             btnVerify.setOnClickListener(v -> verifyCertificate("verified"));
             btnReject.setOnClickListener(v -> verifyCertificate("rejected"));
+        } else if (isEmployerView) {
+            // Employer view: Read-only, no actions
+            layoutAdminActions.setVisibility(View.GONE);
+            btnRemove.setVisibility(View.GONE);
         } else {
+            // Regular user view
             layoutAdminActions.setVisibility(View.GONE);
             btnRemove.setVisibility(View.VISIBLE);
         }

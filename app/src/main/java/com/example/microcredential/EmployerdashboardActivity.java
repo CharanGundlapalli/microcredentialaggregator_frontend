@@ -73,8 +73,7 @@ public class EmployerdashboardActivity extends AppCompatActivity {
                 // You are already here
                 return true;
             } else if (itemId == R.id.navigation_search) {
-                // TODO: Navigate to Search screen
-                Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, EmployerSearchActivity.class));
                 return true;
             } else if (itemId == R.id.navigation_profile) {
                 // TODO: Navigate to Profile screen
@@ -118,7 +117,8 @@ public class EmployerdashboardActivity extends AppCompatActivity {
                 } else {
                     runOnUiThread(() -> {
                         try {
-                            Toast.makeText(EmployerdashboardActivity.this, jsonResponse.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EmployerdashboardActivity.this, jsonResponse.getString("message"),
+                                    Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -152,13 +152,15 @@ public class EmployerdashboardActivity extends AppCompatActivity {
                 if (jsonResponse.getString("status").equals("success")) {
                     runOnUiThread(() -> {
                         sessionManager.logout();
-                        Toast.makeText(EmployerdashboardActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EmployerdashboardActivity.this, "Logged out successfully", Toast.LENGTH_SHORT)
+                                .show();
                         redirectToLogin();
                     });
                 } else {
                     runOnUiThread(() -> {
                         try {
-                            Toast.makeText(EmployerdashboardActivity.this, jsonResponse.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EmployerdashboardActivity.this, jsonResponse.getString("message"),
+                                    Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
