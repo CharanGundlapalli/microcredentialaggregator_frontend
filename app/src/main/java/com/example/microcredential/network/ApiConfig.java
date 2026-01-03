@@ -21,4 +21,7 @@ public class ApiConfig {
     public static final String UPDATE_USER_STATUS_URL = BASE_URL + "update_user_status.php";
     public static final String ADMIN_VIEW_USER_CERTIFICATES_URL = BASE_URL + "admin_view_user_certificates.php";
     public static final String VERIFY_CERTIFICATE_URL = BASE_URL + "verify_certificate.php";
+    public static final String ADMIN_VIEW_PENDING_CERTIFICATES_URL = BASE_URL + "admin_view_pending_certificates.php";
+    public static final String ADMIN_VIEW_UNVERIFIED_ISSUERS_URL = BASE_URL + "admin_view_unverified_issuers.php";
+    public static final String ADMIN_VERIFY_ISSUER_URL = BASE_URL + "admin_verify_issuer.php";
 }

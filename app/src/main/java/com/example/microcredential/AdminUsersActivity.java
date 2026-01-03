@@ -89,8 +89,9 @@ public class AdminUsersActivity extends AppCompatActivity {
             } else if (itemId == R.id.navigation_users) {
                 return true;
             } else if (itemId == R.id.navigation_requests) {
-                // TODO: Navigate to Requests
-                Toast.makeText(this, "Requests", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, AdminRequestsActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
                 return true;
             } else if (itemId == R.id.navigation_profile) {
                 // TODO: Navigate to Profile

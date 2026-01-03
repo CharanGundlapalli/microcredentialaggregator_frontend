@@ -24,18 +24,20 @@ if (empty($user_uid)) {
 }
 
 /* ---------- FETCH USER DETAILS ONLY ---------- */
-$query = mysqli_query($conn, "
     SELECT
-        user_uid,
-        full_name,
-        email,
-        role,
-        status,
-        dob,
-        gender,
-        created_at
-    FROM users
-    WHERE user_uid = '$user_uid'
+        u.user_uid,
+        u.full_name,
+        u.email,
+        u.role,
+        u.status,
+        u.dob,
+        u.gender,
+        u.created_at,
+        i.issuer_id,
+        i.verified AS issuer_verified
+    FROM users u
+    LEFT JOIN issuers i ON u.user_uid = i.user_uid
+    WHERE u.user_uid = '$user_uid'
 ");
 
 if (mysqli_num_rows($query) === 0) {

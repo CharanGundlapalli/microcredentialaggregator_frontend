@@ -1,0 +1,57 @@
+<?php
+header("Content-Type: application/json");
+session_start();
+include "db.php";
+
+/* ---------- ADMIN AUTH CHECK ---------- */
+if (!isset($_SESSION['user_uid']) || $_SESSION['role'] !== 'admin') {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Unauthorized"
+    ]);
+    exit;
+}
+
+/* ---------- FETCH PENDING CERTIFICATES (MINIMAL FIELDS) ---------- */
+$query = "
+    SELECT 
+        certificate_uid,
+        user_uid,
+        certificate_title,
+        issue_date,
+        expiry_date,
+        verification_status
+    FROM certificates
+    WHERE verification_status = 'pending'
+    ORDER BY created_at DESC
+";
+
+$result = mysqli_query($conn, $query);
+
+if (!$result) {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Database error"
+    ]);
+    exit;
+}
+
+$certificates = [];
+
+while ($row = mysqli_fetch_assoc($result)) {
+    $certificates[] = [
+        "certificate_uid"   => $row['certificate_uid'],
+        "user_uid"          => $row['user_uid'],
+        "certificate_title" => $row['certificate_title'],
+        "issue_date"        => $row['issue_date'],
+        "expiry_date"       => $row['expiry_date'],
+        "status"            => $row['verification_status']
+    ];
+}
+
+/* ---------- RESPONSE ---------- */
+echo json_encode([
+    "status" => "success",
+    "count" => count($certificates),
+    "certificates" => $certificates
+]);

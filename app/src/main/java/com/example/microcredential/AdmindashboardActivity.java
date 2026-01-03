@@ -81,8 +81,10 @@ public class AdmindashboardActivity extends AppCompatActivity {
                           // differently
                 return true;
             } else if (itemId == R.id.navigation_requests) {
-                // TODO: Navigate to Requests screen
-                Toast.makeText(this, "Requests", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdmindashboardActivity.this, AdminRequestsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                finish();
                 return true;
             } else if (itemId == R.id.navigation_profile) {
                 // TODO: Navigate to Profile screen

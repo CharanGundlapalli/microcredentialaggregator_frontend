@@ -39,6 +39,7 @@
         <activity android:name=".AdminUsersActivity" android:exported="false" />
         <activity android:name=".AdminUserDetailsActivity" android:exported="false" />
         <activity android:name=".AdminUserCertificatesActivity" android:exported="false" />
+        <activity android:name=".AdminRequestsActivity" android:exported="false" />
         <activity android:name=".CertificatesActivity" android:exported="false" />
 
     </application>

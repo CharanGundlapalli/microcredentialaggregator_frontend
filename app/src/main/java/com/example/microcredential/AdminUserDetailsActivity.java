@@ -32,11 +32,13 @@ public class AdminUserDetailsActivity extends AppCompatActivity {
     private SessionManager sessionManager;
 
     private TextView tvInitial, tvName, tvRole, tvStatus, tvEmail, tvJoined;
-    private MaterialButton btnViewCertificates, btnUpdateStatus;
+    private MaterialButton btnViewCertificates, btnUpdateStatus, btnVerifyIssuer;
     private ProgressBar progressBar;
     private ImageView btnBack;
 
     private String currentStatus = "";
+    private String issuerId;
+    private boolean isIssuerVerified;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class AdminUserDetailsActivity extends AppCompatActivity {
 
         btnViewCertificates = findViewById(R.id.btn_view_certificates);
         btnUpdateStatus = findViewById(R.id.btn_update_status);
+        btnVerifyIssuer = findViewById(R.id.btn_verify_issuer); // Bind verify button
         progressBar = findViewById(R.id.progressBar);
         btnBack = findViewById(R.id.btn_back);
 
@@ -79,6 +82,8 @@ public class AdminUserDetailsActivity extends AppCompatActivity {
             intent.putExtra("user_uid", userUid);
             startActivity(intent);
         });
+
+        btnVerifyIssuer.setOnClickListener(v -> verifyIssuer());
     }
 
     private void fetchUserDetails() {
@@ -138,6 +143,11 @@ public class AdminUserDetailsActivity extends AppCompatActivity {
             tvEmail.setText(email);
             tvJoined.setText(joined);
 
+            // Extract issuer details if available
+            issuerId = user.optString("issuer_id");
+            String issuerVerifiedStr = user.optString("issuer_verified"); // "0" or "1"
+            isIssuerVerified = "1".equals(issuerVerifiedStr);
+
             if (name != null && !name.isEmpty()) {
                 tvInitial.setText(String.valueOf(name.trim().charAt(0)).toUpperCase());
             }
@@ -147,8 +157,20 @@ public class AdminUserDetailsActivity extends AppCompatActivity {
             // Hide "View Certificates" button if the user is an Issuer
             if ("issuer".equalsIgnoreCase(role)) {
                 btnViewCertificates.setVisibility(View.GONE);
+
+                // Show Verify Issuer button if applicable
+                // Logic: Verify button shown if user is issuer AND (not verified OR issuerId is
+                // missing)
+                // If issuerId is missing, they are definitely not verified in issuers table.
+                if (!isIssuerVerified) {
+                    btnVerifyIssuer.setVisibility(View.VISIBLE);
+                } else {
+                    btnVerifyIssuer.setVisibility(View.GONE);
+                }
+
             } else {
                 btnViewCertificates.setVisibility(View.VISIBLE);
+                btnVerifyIssuer.setVisibility(View.GONE);
             }
 
         } catch (Exception e) {
@@ -180,6 +202,62 @@ public class AdminUserDetailsActivity extends AppCompatActivity {
             btnUpdateStatus
                     .setBackgroundTintList(ContextCompat.getColorStateList(this, android.R.color.holo_green_light));
         }
+    }
+
+    private void verifyIssuer() {
+        progressBar.setVisibility(View.VISIBLE);
+        new Thread(() -> {
+            try {
+                URL url = new URL(ApiConfig.ADMIN_VERIFY_ISSUER_URL);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Cookie", "PHPSESSID=" + sessionManager.getSessionId());
+                conn.setDoOutput(true);
+
+                String data = "user_uid=" + userUid;
+
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
+                writer.write(data);
+                writer.flush();
+                writer.close();
+                os.close();
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    response.append(line);
+                }
+                br.close();
+
+                JSONObject jsonResponse = new JSONObject(response.toString());
+
+                runOnUiThread(() -> {
+                    progressBar.setVisibility(View.GONE);
+                    try {
+                        if (jsonResponse.getString("status").equals("success")) {
+                            Toast.makeText(AdminUserDetailsActivity.this, "Issuer Verified", Toast.LENGTH_SHORT).show();
+                            isIssuerVerified = true;
+                            if (btnVerifyIssuer != null)
+                                btnVerifyIssuer.setVisibility(View.GONE);
+                        } else {
+                            Toast.makeText(AdminUserDetailsActivity.this, jsonResponse.getString("message"),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                runOnUiThread(() -> {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(AdminUserDetailsActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
+                });
+            }
+        }).start();
     }
 
     private void toggleUserStatus() {
