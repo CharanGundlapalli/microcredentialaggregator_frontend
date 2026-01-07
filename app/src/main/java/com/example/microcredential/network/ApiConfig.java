@@ -26,4 +26,7 @@ public class ApiConfig {
     public static final String ADMIN_VERIFY_ISSUER_URL = BASE_URL + "admin_verify_issuer.php";
     public static final String EMPLOYER_SEARCH_USER_URL = BASE_URL + "employer_search_user.php";
     public static final String EMPLOYER_VIEW_CERTIFICATES_URL = BASE_URL + "employer_view_certificates.php";
+    public static final String ISSUER_UPLOAD_CERTIFICATES_URL = BASE_URL + "issuer_upload_certificates.php";
+    public static final String PROFILE_URL = BASE_URL + "profile.php";
+    public static final String UPDATE_PROFILE_URL = BASE_URL + "update_profile.php";
 }

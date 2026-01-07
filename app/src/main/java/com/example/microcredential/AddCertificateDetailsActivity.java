@@ -192,16 +192,21 @@ public class AddCertificateDetailsActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.navigation_home) {
                 startActivity(new Intent(this, DashboardActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
                 return true;
             } else if (itemId == R.id.navigation_certificates) {
                 startActivity(new Intent(this, CertificatesActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
                 return true;
             } else if (itemId == R.id.navigation_add) {
                 // Already here
                 return true;
             } else if (itemId == R.id.navigation_profile) {
-                // TODO: Navigate to Profile
-                Toast.makeText(this, "Profile not implemented yet", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, ProfileActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
                 return true;
             }
             return false;

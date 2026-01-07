@@ -67,8 +67,7 @@ public class EmployerSearchActivity extends AppCompatActivity {
             } else if (itemId == R.id.navigation_search) {
                 return true;
             } else if (itemId == R.id.navigation_profile) {
-                // TODO: Navigate to Profile
-                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                 return true;
             }
             return false;

@@ -75,15 +75,14 @@ public class DashboardActivity extends AppCompatActivity {
                 // You are already here
                 return true;
             } else if (itemId == R.id.navigation_certificates) {
-                // TODO: Navigate to Certificates screen
+                // Navigate to Certificates screen
                 startActivity(new Intent(this, CertificatesActivity.class));
                 return true;
             } else if (itemId == R.id.navigation_add) {
                 startActivity(new Intent(this, UploadCertificateActivity.class));
                 return true;
             } else if (itemId == R.id.navigation_profile) {
-                // TODO: Navigate to Profile screen
-                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, ProfileActivity.class));
                 return true;
             }
             return false;

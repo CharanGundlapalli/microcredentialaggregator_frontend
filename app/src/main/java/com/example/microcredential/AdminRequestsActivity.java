@@ -65,8 +65,7 @@ public class AdminRequestsActivity extends AppCompatActivity {
             } else if (itemId == R.id.navigation_requests) {
                 return true;
             } else if (itemId == R.id.navigation_profile) {
-                // TODO: Navigate to Profile
-                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, ProfileActivity.class));
                 return true;
             }
             return false;

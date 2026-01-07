@@ -108,12 +108,26 @@ public class LoginActivity extends AppCompatActivity {
                             // Extract session ID from headers
                             Map<String, List<String>> headerFields = conn.getHeaderFields();
                             List<String> cookiesHeader = headerFields.get("Set-Cookie");
+                            if (cookiesHeader == null) {
+                                // Try lowercase check if needed, or other casing
+                                cookiesHeader = headerFields.get("set-cookie");
+                            }
+
                             String sessionId = null;
                             if (cookiesHeader != null) {
                                 for (String cookie : cookiesHeader) {
-                                    if (cookie.startsWith("PHPSESSID")) {
-                                        sessionId = cookie.substring(cookie.indexOf("=") + 1, cookie.indexOf(";"));
-                                        break;
+                                    if (cookie.contains("PHPSESSID")) {
+                                        // content usually: PHPSESSID=xyz; path=/
+                                        int start = cookie.indexOf("PHPSESSID=");
+                                        if (start != -1) {
+                                            start += "PHPSESSID=".length();
+                                            int end = cookie.indexOf(";", start);
+                                            if (end == -1) {
+                                                end = cookie.length();
+                                            }
+                                            sessionId = cookie.substring(start, end);
+                                            break;
+                                        }
                                     }
                                 }
                             }
@@ -138,9 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                 conn.disconnect();
 
             } catch (Exception e) {
-                runOnUiThread(() ->
-                        Toast.makeText(this, "Network error. Check server.", Toast.LENGTH_SHORT).show()
-                );
+                runOnUiThread(() -> Toast.makeText(this, "Network error. Check server.", Toast.LENGTH_SHORT).show());
                 e.printStackTrace();
             }
         }).start();

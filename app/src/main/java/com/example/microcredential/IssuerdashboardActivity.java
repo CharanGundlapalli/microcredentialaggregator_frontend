@@ -73,16 +73,15 @@ public class IssuerdashboardActivity extends AppCompatActivity {
                 // You are already here
                 return true;
             } else if (itemId == R.id.navigation_issue) {
-                // TODO: Navigate to Issue screen
-                Toast.makeText(this, "Issue", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(IssuerdashboardActivity.this, IssuerIssueCertificateActivity.class));
+                overridePendingTransition(0, 0);
                 return true;
             } else if (itemId == R.id.navigation_history) {
                 // TODO: Navigate to History screen
                 Toast.makeText(this, "History", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (itemId == R.id.navigation_profile) {
-                // TODO: Navigate to Profile screen
-                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(IssuerdashboardActivity.this, ProfileActivity.class));
                 return true;
             }
             return false;
@@ -114,7 +113,8 @@ public class IssuerdashboardActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         try {
                             tvTotalCertsIssued.setText(String.valueOf(jsonResponse.getInt("certificates_issued")));
-                            tvTotalLearnersCovered.setText(String.valueOf(jsonResponse.getInt("pending_user_certificates")));
+                            tvTotalLearnersCovered
+                                    .setText(String.valueOf(jsonResponse.getInt("pending_user_certificates")));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -122,7 +122,8 @@ public class IssuerdashboardActivity extends AppCompatActivity {
                 } else {
                     runOnUiThread(() -> {
                         try {
-                            Toast.makeText(IssuerdashboardActivity.this, jsonResponse.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(IssuerdashboardActivity.this, jsonResponse.getString("message"),
+                                    Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -156,13 +157,15 @@ public class IssuerdashboardActivity extends AppCompatActivity {
                 if (jsonResponse.getString("status").equals("success")) {
                     runOnUiThread(() -> {
                         sessionManager.logout();
-                        Toast.makeText(IssuerdashboardActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(IssuerdashboardActivity.this, "Logged out successfully", Toast.LENGTH_SHORT)
+                                .show();
                         redirectToLogin();
                     });
                 } else {
                     runOnUiThread(() -> {
                         try {
-                            Toast.makeText(IssuerdashboardActivity.this, jsonResponse.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(IssuerdashboardActivity.this, jsonResponse.getString("message"),
+                                    Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

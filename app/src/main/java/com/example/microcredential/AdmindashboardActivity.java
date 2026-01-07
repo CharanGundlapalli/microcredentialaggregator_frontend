@@ -84,11 +84,9 @@ public class AdmindashboardActivity extends AppCompatActivity {
                 Intent intent = new Intent(AdmindashboardActivity.this, AdminRequestsActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
-                finish();
                 return true;
             } else if (itemId == R.id.navigation_profile) {
-                // TODO: Navigate to Profile screen
-                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AdmindashboardActivity.this, ProfileActivity.class));
                 return true;
             }
             return false;

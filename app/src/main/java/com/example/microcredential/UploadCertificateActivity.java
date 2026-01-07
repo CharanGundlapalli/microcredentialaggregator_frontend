@@ -111,17 +111,21 @@ public class UploadCertificateActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.navigation_home) {
                 startActivity(new Intent(this, DashboardActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
                 return true;
             } else if (itemId == R.id.navigation_certificates) {
-                // TODO: Navigate to Certificates screen
                 startActivity(new Intent(this, CertificatesActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
                 return true;
             } else if (itemId == R.id.navigation_add) {
                 // You are already here
                 return true;
             } else if (itemId == R.id.navigation_profile) {
-                // TODO: Navigate to Profile screen
-                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, ProfileActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
                 return true;
             }
             return false;
