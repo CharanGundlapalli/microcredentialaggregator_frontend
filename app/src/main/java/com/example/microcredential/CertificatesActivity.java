@@ -160,7 +160,7 @@ public class CertificatesActivity extends AppCompatActivity implements Certifica
 
     private void logoutUser() {
         new Thread(() -> {
-            sessionManager.logout();
+            sessionManager.logoutUser();
             runOnUiThread(() -> {
                 Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
                 redirectToLogin();

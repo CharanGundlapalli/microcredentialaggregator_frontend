@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/app_background">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Requests"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_primary"
                 android:textSize="20sp"
                 android:textStyle="bold" 
                 android:layout_gravity="center"/>
@@ -37,9 +37,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/appbar"
         android:background="@android:color/transparent"
-        app:tabIndicatorColor="@color/black"
-        app:tabSelectedTextColor="@color/black"
-        app:tabTextColor="@android:color/darker_gray" />
+        app:tabIndicatorColor="@color/text_primary"
+        app:tabSelectedTextColor="@color/text_primary"
+        app:tabTextColor="@color/text_secondary" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
@@ -52,7 +52,7 @@
         android:id="@+id/bottom_navigation_admin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bottom_nav_background"
+        android:background="?attr/colorSurface"
         app:itemIconTint="@color/bottom_nav_color"
         app:itemTextColor="@color/bottom_nav_color"
         app:labelVisibilityMode="labeled"

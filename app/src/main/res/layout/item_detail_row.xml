@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Label"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@color/text_secondary"
         android:textSize="14sp" />
 
     <TextView
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Value"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text_primary"
         android:textSize="16sp"
         android:layout_marginTop="4dp"/>
 

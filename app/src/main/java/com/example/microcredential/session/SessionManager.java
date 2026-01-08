@@ -1,6 +1,7 @@
 package com.example.microcredential.session;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 
 public class SessionManager {
@@ -57,9 +58,21 @@ public class SessionManager {
         return pref.getString(KEY_SESSION_ID, null);
     }
 
-    // Logout
-    public void logout() {
+    // Logout User
+    public void logoutUser() {
+        // Clearing all data from Shared Preferences
         editor.clear();
         editor.apply();
+
+        // After logout redirect user to Loing Activity
+        Intent i = new Intent(context, com.example.microcredential.LoginActivity.class);
+        // Closing all the Activities
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        // Add new Flag to start new Activity
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        // Staring Login Activity
+        context.startActivity(i);
     }
 }

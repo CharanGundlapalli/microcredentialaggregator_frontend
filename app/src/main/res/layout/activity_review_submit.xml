@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/app_background">
 
     <!-- App Bar -->
     <com.google.android.material.appbar.AppBarLayout
@@ -38,14 +38,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Micro-Credential"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_primary"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Aggregator"
-                    android:textColor="@android:color/darker_gray" />
+                    android:textColor="@color/text_secondary" />
             </LinearLayout>
 
             <LinearLayout
@@ -193,7 +193,7 @@ Submit" />
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Certificate Details"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_primary"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -216,6 +216,8 @@ Submit" />
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_input"
                     android:hint="e.g., Advanced Web Development"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
                     android:padding="12dp" />
 
                 <TextView
@@ -231,6 +233,8 @@ Submit" />
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_input"
                     android:hint="e.g., Academic"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
                     android:padding="12dp" />
 
                 <TextView
@@ -246,6 +250,8 @@ Submit" />
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_input"
                     android:hint="e.g., CRED12345"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
                     android:padding="12dp" />
 
                 <TextView
@@ -263,6 +269,8 @@ Submit" />
                     android:drawableStart="@drawable/ic_issuing_organization"
                     android:drawablePadding="8dp"
                     android:hint="e.g., Tech University"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
                     android:padding="12dp" />
 
                 <LinearLayout
@@ -290,6 +298,7 @@ Submit" />
                             android:background="@drawable/bg_input"
                             android:drawableStart="@drawable/ic_calendar"
                             android:drawablePadding="8dp"
+                            android:textColor="@color/text_primary"
                             android:padding="12dp" />
                     </LinearLayout>
 
@@ -316,6 +325,7 @@ Submit" />
                             android:background="@drawable/bg_input"
                             android:drawableStart="@drawable/ic_calendar"
                             android:drawablePadding="8dp"
+                            android:textColor="@color/text_primary"
                             android:padding="12dp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -367,7 +377,7 @@ Submit" />
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bottom_nav_background"
+        android:background="?attr/colorSurface"
         app:labelVisibilityMode="labeled"
         app:itemIconTint="@color/bottom_nav_color"
         app:itemTextColor="@color/bottom_nav_color"

@@ -268,7 +268,7 @@ public class ReviewSubmitActivity extends AppCompatActivity {
     }
 
     private void logoutUser() {
-        sessionManager.logout();
+        sessionManager.logoutUser();
         Toast.makeText(ReviewSubmitActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
         redirectToLogin();
     }

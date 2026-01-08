@@ -47,7 +47,8 @@ if ($user['role'] === 'issuer') {
 $_SESSION['user_uid'] = $user['user_uid'];
 $_SESSION['login_time'] = time();
 $_SESSION['role'] = $user['role'];
-$_SESSION['expire_time'] = time() + (30 * 60);
+$_SESSION['last_activity'] = time(); // Initialize timeout timer
+$_SESSION['expire_time'] = time() + (30 * 60); // Keeping original for reference, but auth_session uses last_activity
 
 // device + IP
 $ip = $_SERVER['REMOTE_ADDR'];

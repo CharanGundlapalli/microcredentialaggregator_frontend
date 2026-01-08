@@ -150,7 +150,7 @@ public class EmployerdashboardActivity extends AppCompatActivity {
 
                 if (jsonResponse.getString("status").equals("success")) {
                     runOnUiThread(() -> {
-                        sessionManager.logout();
+                        sessionManager.logoutUser();
                         Toast.makeText(EmployerdashboardActivity.this, "Logged out successfully", Toast.LENGTH_SHORT)
                                 .show();
                         redirectToLogin();

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="pending_text_color">#FFD54F</color> <!-- Lighter amber for dark mode -->
+    <color name="rejected_text_color">#EF9A9A</color> <!-- Lighter red for dark mode -->
+    
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B3FFFFFF</color>
+    <color name="button_text">#000000</color>
+    
+    <color name="material_grey_600">#9E9E9E</color>
+    <color name="purple_500">#BB86FC</color> <!-- Material Dark Primary -->
+
+    <color name="app_background">#121212</color>
+    <color name="surface_color">#1E1E1E</color>
+    <color name="card_stroke">#33FFFFFF</color>
+    <color name="nav_icon_selected">#D0BCFF</color> <!-- Lighter purple for dark mode -->
+</resources>

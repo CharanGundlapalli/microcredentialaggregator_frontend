@@ -110,6 +110,15 @@ public class DashboardActivity extends AppCompatActivity {
 
                 JSONObject jsonResponse = new JSONObject(response.toString());
 
+                if (jsonResponse.optString("status").equals("session_expired")) {
+                    runOnUiThread(() -> {
+                        Toast.makeText(DashboardActivity.this, jsonResponse.optString("message"), Toast.LENGTH_LONG)
+                                .show();
+                        sessionManager.logoutUser();
+                    });
+                    return;
+                }
+
                 if (jsonResponse.getString("status").equals("success")) {
                     runOnUiThread(() -> {
                         try {
@@ -157,7 +166,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                 if (jsonResponse.getString("status").equals("success")) {
                     runOnUiThread(() -> {
-                        sessionManager.logout();
+                        sessionManager.logoutUser();
                         Toast.makeText(DashboardActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
                         redirectToLogin();
                     });

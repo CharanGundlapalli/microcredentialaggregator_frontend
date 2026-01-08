@@ -75,7 +75,58 @@ public class SignupActivity extends AppCompatActivity {
 
     private void selectRole(String role) {
         selectedRole = role;
-        Toast.makeText(this, "Selected role: " + role, Toast.LENGTH_SHORT).show();
+        updateRoleSelectionUI();
+    }
+
+    private void updateRoleSelectionUI() {
+        // Reset all backgrounds and icon tints
+        int unselectedBg = R.drawable.bg_role_unselected;
+        int selectedBg = R.drawable.bg_role_selected;
+        int unselectedTint = android.R.color.darker_gray;
+        int selectedTint = android.R.color.black; // Or specific color #A08AB8
+
+        // Helper to reset a role view
+        resetRoleView(roleLearner, R.id.iv_role_learner, unselectedBg, unselectedTint);
+        resetRoleView(roleAdmin, R.id.iv_role_admin, unselectedBg, unselectedTint);
+        resetRoleView(roleEmployer, R.id.iv_role_employer, unselectedBg, unselectedTint);
+        resetRoleView(roleIssuer, R.id.iv_role_issuer, unselectedBg, unselectedTint);
+
+        // Highlight selected role
+        switch (selectedRole) {
+            case "user":
+                highlightRoleView(roleLearner, R.id.iv_role_learner, selectedBg, selectedTint);
+                break;
+            case "admin":
+                highlightRoleView(roleAdmin, R.id.iv_role_admin, selectedBg, selectedTint);
+                break;
+            case "employer":
+                highlightRoleView(roleEmployer, R.id.iv_role_employer, selectedBg, selectedTint);
+                break;
+            case "issuer":
+                highlightRoleView(roleIssuer, R.id.iv_role_issuer, selectedBg, selectedTint);
+                break;
+        }
+    }
+
+    private void resetRoleView(LinearLayout layout, int imageId, int bgRes, int tintRes) {
+        layout.setBackgroundResource(bgRes);
+        android.widget.ImageView iv = layout.findViewById(imageId);
+        if (iv != null) {
+            iv.setColorFilter(androidx.core.content.ContextCompat.getColor(this, tintRes));
+        }
+    }
+
+    private void highlightRoleView(LinearLayout layout, int imageId, int bgRes, int tintRes) {
+        layout.setBackgroundResource(bgRes);
+        android.widget.ImageView iv = layout.findViewById(imageId);
+        if (iv != null) {
+            // using parsing for custom color if needed, or resource
+            if (tintRes == android.R.color.black) {
+                iv.setColorFilter(android.graphics.Color.parseColor("#A08AB8"));
+            } else {
+                iv.setColorFilter(androidx.core.content.ContextCompat.getColor(this, tintRes));
+            }
+        }
     }
 
     private void signupUser(String name, String email, String password, String role) {
@@ -101,8 +152,7 @@ public class SignupActivity extends AppCompatActivity {
                 os.close();
 
                 BufferedReader br = new BufferedReader(
-                        new InputStreamReader(conn.getInputStream())
-                );
+                        new InputStreamReader(conn.getInputStream()));
 
                 StringBuilder response = new StringBuilder();
                 String line;
@@ -134,9 +184,7 @@ public class SignupActivity extends AppCompatActivity {
                 conn.disconnect();
 
             } catch (Exception e) {
-                runOnUiThread(() ->
-                        Toast.makeText(this, "Network error", Toast.LENGTH_SHORT).show()
-                );
+                runOnUiThread(() -> Toast.makeText(this, "Network error", Toast.LENGTH_SHORT).show());
             }
         }).start();
     }

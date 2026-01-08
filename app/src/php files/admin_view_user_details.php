@@ -1,14 +1,11 @@
 <?php
 header("Content-Type: application/json");
-session_start();
+include "auth_session.php";
 include "db.php";
 
-/* ---------- ADMIN AUTH CHECK ---------- */
-if (!isset($_SESSION['user_uid']) || $_SESSION['role'] !== 'admin') {
-    echo json_encode([
-        "status" => "error",
-        "message" => "Unauthorized access"
-    ]);
+/* ---------- AUTH CHECK ---------- */
+if ($_SESSION['role'] !== 'admin') {
+    echo json_encode(["status" => "error", "message" => "Unauthorized"]);
     exit;
 }
 
@@ -24,6 +21,9 @@ if (empty($user_uid)) {
 }
 
 /* ---------- FETCH USER DETAILS ONLY ---------- */
+$user_uid_safe = mysqli_real_escape_string($conn, $user_uid);
+
+$query = mysqli_query($conn, "
     SELECT
         u.user_uid,
         u.full_name,
@@ -37,7 +37,7 @@ if (empty($user_uid)) {
         i.verified AS issuer_verified
     FROM users u
     LEFT JOIN issuers i ON u.user_uid = i.user_uid
-    WHERE u.user_uid = '$user_uid'
+    WHERE u.user_uid = '$user_uid_safe'
 ");
 
 if (mysqli_num_rows($query) === 0) {

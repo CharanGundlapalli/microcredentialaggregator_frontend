@@ -1,16 +1,10 @@
 <?php
 header("Content-Type: application/json");
-session_start();
+include "auth_session.php";
 include "db.php";
 
-// check login
-if (!isset($_SESSION['user_uid'])) {
-    echo json_encode([
-        "status" => "error",
-        "message" => "Unauthorized"
-    ]);
-    exit;
-}
+// check login (handled by auth_session)
+// if (!isset($_SESSION['user_uid'])) { ... }
 
 $user_uid = $_SESSION['user_uid'];
 

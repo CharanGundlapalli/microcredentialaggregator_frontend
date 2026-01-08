@@ -119,6 +119,15 @@ public class AdminUsersActivity extends AppCompatActivity {
 
                 JSONObject jsonResponse = new JSONObject(response.toString());
 
+                if (jsonResponse.optString("status").equals("session_expired")) {
+                    runOnUiThread(() -> {
+                        Toast.makeText(AdminUsersActivity.this, jsonResponse.optString("message"), Toast.LENGTH_LONG)
+                                .show();
+                        sessionManager.logoutUser();
+                    });
+                    return;
+                }
+
                 if (jsonResponse.getString("status").equals("success")) {
                     JSONArray data = jsonResponse.getJSONArray("data");
 

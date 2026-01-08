@@ -8,8 +8,8 @@
     android:layout_marginVertical="8dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="2dp"
-    app:cardBackgroundColor="@android:color/white"
-    app:strokeColor="#E0E0E0"
+    app:cardBackgroundColor="@color/surface_color"
+    app:strokeColor="@color/card_stroke"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +24,7 @@
             android:layout_marginEnd="8dp"
             android:text="Advanced Web Development"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text_primary"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/tv_status"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
             android:paddingHorizontal="8dp"
             android:paddingVertical="4dp"
             android:text="Pending"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text_primary"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Issued: Sep 15 2024"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/text_secondary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_certificate_title" />
 

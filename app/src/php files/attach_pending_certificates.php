@@ -26,8 +26,10 @@ function attachPendingCertificates($conn, $user_uid, $email) {
     ");
 
     if (mysqli_num_rows($query) === 0) {
-        return; // No pending certificates
+        return 0; // No pending certificates
     }
+
+    $count = 0;
 
     while ($row = mysqli_fetch_assoc($query)) {
 
@@ -64,20 +66,24 @@ function attachPendingCertificates($conn, $user_uid, $email) {
             $row['issued_by']
         );
 
-        $stmt->execute();
+        if ($stmt->execute()) {
+            $count++;
 
-        // 🔥 Apply skill mapping immediately (trusted issuer)
-        applySkillMappingDirect(
-            $conn,
-            $row['issuing_organization'],
-            $row['certificate_title'],
-            $user_uid
-        );
+            // 🔥 Apply skill mapping immediately (trusted issuer)
+            applySkillMappingDirect(
+                $conn,
+                $row['issuing_organization'],
+                $row['certificate_title'],
+                $user_uid
+            );
 
-        // Remove from pending table
-        mysqli_query($conn, "
-            DELETE FROM pending_certificates
-            WHERE id = {$row['id']}
-        ");
+            // Remove from pending table
+            mysqli_query($conn, "
+                DELETE FROM pending_certificates
+                WHERE id = {$row['id']}
+            ");
+        }
     }
+
+    return $count;
 }

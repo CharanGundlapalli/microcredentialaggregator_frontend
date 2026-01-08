@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -44,6 +45,11 @@
         <activity android:name=".EmployerSearchActivity" android:exported="false" />
         <activity android:name=".EmployerUserCertificatesActivity" android:exported="false" />
         <activity android:name=".IssuerIssueCertificateActivity" android:exported="false" />
+        <activity android:name=".IssuerHistoryActivity" android:exported="false" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity android:name=".ProfileActivity" android:exported="false" />
 
     </application>

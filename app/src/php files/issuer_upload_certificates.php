@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json");
-session_start();
+include "auth_session.php";
 
 include "db.php";
 include "apply_skill_mapping_direct.php";
@@ -8,7 +8,7 @@ include "apply_skill_mapping_direct.php";
 // --------------------
 // 1. AUTH & ROLE CHECK
 // --------------------
-if (!isset($_SESSION['user_uid']) || $_SESSION['role'] !== 'issuer') {
+if ($_SESSION['role'] !== 'issuer') {
     echo json_encode(["status" => "error", "message" => "Unauthorized"]);
     exit;
 }

@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="24dp"
-        android:background="@drawable/bg_card"
+        android:background="@color/surface_color"
         android:elevation="2dp"
         android:orientation="vertical"
         android:padding="24dp">

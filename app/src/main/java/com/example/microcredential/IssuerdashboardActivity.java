@@ -77,8 +77,8 @@ public class IssuerdashboardActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 return true;
             } else if (itemId == R.id.navigation_history) {
-                // TODO: Navigate to History screen
-                Toast.makeText(this, "History", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(IssuerdashboardActivity.this, IssuerHistoryActivity.class));
+                overridePendingTransition(0, 0);
                 return true;
             } else if (itemId == R.id.navigation_profile) {
                 startActivity(new Intent(IssuerdashboardActivity.this, ProfileActivity.class));
@@ -108,6 +108,15 @@ public class IssuerdashboardActivity extends AppCompatActivity {
                 br.close();
 
                 JSONObject jsonResponse = new JSONObject(response.toString());
+
+                if (jsonResponse.optString("status").equals("session_expired")) {
+                    runOnUiThread(() -> {
+                        Toast.makeText(IssuerdashboardActivity.this, jsonResponse.optString("message"),
+                                Toast.LENGTH_LONG).show();
+                        sessionManager.logoutUser();
+                    });
+                    return;
+                }
 
                 if (jsonResponse.getString("status").equals("success")) {
                     runOnUiThread(() -> {
@@ -156,7 +165,7 @@ public class IssuerdashboardActivity extends AppCompatActivity {
 
                 if (jsonResponse.getString("status").equals("success")) {
                     runOnUiThread(() -> {
-                        sessionManager.logout();
+                        sessionManager.logoutUser();
                         Toast.makeText(IssuerdashboardActivity.this, "Logged out successfully", Toast.LENGTH_SHORT)
                                 .show();
                         redirectToLogin();

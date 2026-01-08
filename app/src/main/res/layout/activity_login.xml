@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@color/app_background"
     tools:context=".LoginActivity">
 
     <ImageView
@@ -28,7 +28,7 @@
         android:text="Micro-Credential
 Aggregator"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text_primary"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@ Aggregator"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Secure credential management platform"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@color/text_secondary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,14 +75,14 @@ Aggregator"
                 android:gravity="center"
                 android:paddingBottom="8dp"
                 android:text="Log In"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@android:color/darker_gray" />
+                android:background="@color/card_stroke" />
 
             <TextView
                 android:id="@+id/tv_signup_tab"
@@ -92,14 +92,14 @@ Aggregator"
                 android:gravity="center"
                 android:paddingBottom="8dp"
                 android:text="Sign Up"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/text_secondary"
                 android:textSize="16sp" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
+            android:background="@color/card_stroke" />
 
 
         <TextView
@@ -107,7 +107,7 @@ Aggregator"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Email"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text_primary"
             android:textSize="14sp" />
 
         <EditText
@@ -117,6 +117,8 @@ Aggregator"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_input"
             android:hint="Enter your email"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_secondary"
             android:inputType="textEmailAddress"
             android:padding="12dp" />
 
@@ -125,7 +127,7 @@ Aggregator"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Password"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text_primary"
             android:textSize="14sp" />
 
         <EditText
@@ -135,6 +137,8 @@ Aggregator"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_input"
             android:hint="Enter your password"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_secondary"
             android:inputType="textPassword"
             android:padding="12dp" />
 
@@ -160,14 +164,14 @@ Aggregator"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:src="@drawable/ic_lock"
-                app:tint="@android:color/darker_gray" />
+                app:tint="@color/text_secondary" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Secure &amp; encrypted credential storage"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
@@ -177,7 +181,7 @@ Aggregator"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:text="Demo mode: Click any button to explore"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@color/text_secondary"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

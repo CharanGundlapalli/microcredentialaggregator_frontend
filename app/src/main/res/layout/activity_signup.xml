@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@color/app_background"
     tools:context=".SignupActivity">
 
     <ImageView
@@ -27,7 +27,7 @@
         android:layout_marginTop="16dp"
         android:text="Micro-Credential\nAggregator"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text_primary"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Secure credential management platform"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@color/text_secondary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,13 +76,13 @@
                 android:gravity="center"
                 android:paddingBottom="8dp"
                 android:text="Log In"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/text_secondary"
                 android:textSize="16sp" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@android:color/darker_gray" />
+                android:background="@color/card_stroke" />
 
             <TextView
                 android:id="@+id/tv_signup_tab"
@@ -92,7 +92,7 @@
                 android:gravity="center"
                 android:paddingBottom="8dp"
                 android:text="Sign Up"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -100,7 +100,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
+            android:background="@color/card_stroke" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -116,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Full Name"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_primary"
                     android:textSize="14sp" />
 
                 <EditText
@@ -126,6 +126,8 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_input"
                     android:hint="Enter your full name"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
                     android:inputType="textPersonName"
                     android:padding="12dp" />
 
@@ -134,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="College Email"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_primary"
                     android:textSize="14sp" />
 
                 <EditText
@@ -144,6 +146,8 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_input"
                     android:hint="your.name@university.edu"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
                     android:inputType="textEmailAddress"
                     android:padding="12dp" />
 
@@ -152,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Password"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_primary"
                     android:textSize="14sp" />
 
                 <EditText
@@ -162,6 +166,8 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_input"
                     android:hint="Enter your password"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
                     android:inputType="textPassword"
                     android:padding="12dp" />
 
@@ -170,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Select Your Role"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/text_primary"
                     android:textSize="14sp" />
 
                 <LinearLayout
@@ -183,6 +189,7 @@
                     android:padding="12dp">
 
                     <ImageView
+                        android:id="@+id/iv_role_learner"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_learner"
@@ -198,7 +205,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Learner"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -206,7 +213,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Upload and manage credentials"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@color/text_secondary" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -220,10 +227,11 @@
                     android:padding="12dp">
 
                     <ImageView
+                        android:id="@+id/iv_role_admin"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_admin"
-                        app:tint="@android:color/darker_gray" />
+                        app:tint="@color/text_secondary" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -235,7 +243,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Administrator"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -243,7 +251,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Verify and validate certificates"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@color/text_secondary" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -257,10 +265,11 @@
                     android:padding="12dp">
 
                     <ImageView
+                        android:id="@+id/iv_role_employer"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_employer"
-                        app:tint="@android:color/darker_gray" />
+                        app:tint="@color/text_secondary" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -272,7 +281,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Employer"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -280,7 +289,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="View verified credentials"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@color/text_secondary" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -294,10 +303,11 @@
                     android:padding="12dp">
 
                     <ImageView
+                        android:id="@+id/iv_role_issuer"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_issue"
-                        app:tint="@android:color/darker_gray" />
+                        app:tint="@color/text_secondary" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -309,7 +319,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Issuer"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -317,7 +327,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Issue and manage certificates"
-                            android:textColor="@android:color/darker_gray" />
+                            android:textColor="@color/text_secondary" />
                     </LinearLayout>
                 </LinearLayout>
 

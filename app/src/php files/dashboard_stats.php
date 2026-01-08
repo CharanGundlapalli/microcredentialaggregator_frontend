@@ -1,10 +1,10 @@
 <?php
 header("Content-Type: application/json");
-session_start();
+include "auth_session.php";
 include "db.php";
 
-/* ---------- AUTH CHECK ---------- */
-if (!isset($_SESSION['user_uid']) || !isset($_SESSION['role'])) {
+/* ---------- ROLE CHECK ---------- */
+if (!isset($_SESSION['role'])) {
     echo json_encode([
         "status" => "error",
         "message" => "Unauthorized"

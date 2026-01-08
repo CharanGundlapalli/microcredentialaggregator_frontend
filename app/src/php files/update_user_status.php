@@ -1,18 +1,11 @@
 <?php
 header("Content-Type: application/json");
-session_start();
+include "auth_session.php";
 include "db.php";
 
-// admin check
-if (
-    !isset($_SESSION['user_uid']) ||
-    !isset($_SESSION['role']) ||
-    $_SESSION['role'] !== 'admin'
-) {
-    echo json_encode([
-        "status" => "error",
-        "message" => "Unauthorized"
-    ]);
+// check admin
+if ($_SESSION['role'] !== 'admin') {
+    echo json_encode(["status" => "error", "message" => "Unauthorized"]);
     exit;
 }
 
