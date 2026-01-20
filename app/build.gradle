@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.microcredential'
+    namespace 'com.simats.microcredential'
     compileSdk 36
 
     defaultConfig {
-        applicationId "com.example.microcredential"
+        applicationId "com.simats.microcredential"
         minSdk 23
         targetSdk 36
         versionCode 1
@@ -41,4 +41,5 @@ dependencies {
     implementation 'androidx.biometric:biometric:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-process:2.6.2'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'com.android.billingclient:billing:7.1.1'
 }
